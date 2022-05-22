@@ -1,0 +1,25 @@
+{% extends 'layout.html.twig' %}
+
+
+
+{% block content %}
+    <h1>articles</h1>
+    <ul>
+
+        <form>
+            <select>
+                {% for article in articles %}
+                <option>{{ article.section }} </option>
+            </select>
+            <button>valider</button>
+        </form>
+        <li><a href="/admin/show?id={{ article.id }}">{{ article.section }}: {{ article.title }}</a></li>
+        {% else %}
+            <li>Nothing to display</li>
+        {% endfor %}
+    </ul>
+
+
+    <a href="/admin/add">ajouter</a>
+
+{% endblock %}

@@ -16,4 +16,5 @@ return [
     'admin' => ['AdminController', 'index'],
     'admin/add' => ['AdminController', 'add',],
     'admin/show' => ['AdminController', 'show', ['id'],],
+    'admin/delete' => ['AdminController', 'delete',],
 ];

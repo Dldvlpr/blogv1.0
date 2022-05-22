@@ -7,4 +7,8 @@
 <p>{{ article.core }}</p>
 <p>{{ article.author }}</p>
 
+    <form action="/admin/delete" method="POST">
+        <input type="hidden" name="id" value="{{ article.id }}">
+        <button>Delete</button>
+    </form>
 {% endblock %}

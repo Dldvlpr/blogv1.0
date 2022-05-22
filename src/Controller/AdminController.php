@@ -6,12 +6,12 @@ use App\Model\AdminManager;
 
 class AdminController extends AbstractController
 {
-    public function index(): string
+    public function list(): string
     {
         $adminManager = new AdminManager();
         $articles = $adminManager->selectAll('title');
 
-        return $this->twig->render('Admin/index.html.twig', ['articles' => $articles]);
+        return $this->twig->render('Admin/list.html.twig', ['articles' => $articles]);
     }
 
     public function add(): ?string
@@ -21,7 +21,7 @@ class AdminController extends AbstractController
             $adminManager = new AdminManager();
             $adminManager->add($article);
 
-            $this->twig->render('Admin/add.html.twig');
+            header('Location:/admin');
              return null;
         }
 
@@ -33,7 +33,17 @@ class AdminController extends AbstractController
         $adminManager = new AdminManager();
         $article = $adminManager->selectOneById($id);
 
-        return $this->twig->render('Admin/show.html.twig', ['article' => $article]);
+        return $this->twig->render('Admin/article.html.twig', ['article' => $article]);
     }
 
+    public function delete(): void
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $id = trim($_POST['id']);
+            $adminManager = new AdminManager();
+            $adminManager->delete((int)$id);
+
+            header('Location:/admin');
+        };
+    }
 }
